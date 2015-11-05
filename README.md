@@ -74,3 +74,8 @@ An action creator for `UPDATE_URL`
 ## License
 
 [ISC](./LICENSE.md).
+
+---
+
+![Test status](https://img.shields.io/travis/colinmeinke/universal-redux-router.svg)
+
