@@ -1,6 +1,6 @@
 # Universal Redux Router
 
-An very simple router for [Redux](https://github.com/rackt/redux)
+A very simple router for [Redux](https://github.com/rackt/redux)
 and [React](https://github.com/facebook/react) that works on
 both server and client.
 
