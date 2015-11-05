@@ -9,6 +9,7 @@ describe( 'component', () => {
     const props = {
       children: 'Hello world',
       onClick: () => {},
+      style: { backgroundColor: 'rgb( 30, 30, 30 )' },
       url: '/hello-world',
     };
 
@@ -21,6 +22,10 @@ describe( 'component', () => {
     it( 'should render correct markup', () => {
       expect( link.type ).toBe( 'a' );
       expect( link.props.children ).toEqual( props.children );
+    });
+
+    it( 'should pass through custom props', () => {
+      expect( link.props.style ).toEqual( props.style );
     });
   });
 });

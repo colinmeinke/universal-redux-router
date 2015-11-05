@@ -91,6 +91,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
@@ -106,14 +108,17 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
 	var Link = function Link(_ref) {
 	  var children = _ref.children;
-	  var onClick = _ref.onClick;
 	  var url = _ref.url;
+
+	  var props = _objectWithoutProperties(_ref, ['children', 'url']);
 
 	  return _react2.default.createElement(
 	    'a',
-	    { href: url, onClick: onClick },
+	    _extends({ href: url }, props),
 	    children
 	  );
 	};

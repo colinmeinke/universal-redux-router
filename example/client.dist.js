@@ -4396,11 +4396,12 @@
 	    var fakeNode = document.createElement('react');
 	    ReactErrorUtils.invokeGuardedCallback = function (name, func, a, b) {
 	      var boundFunc = func.bind(null, a, b);
-	      fakeNode.addEventListener(name, boundFunc, false);
+	      var evtType = 'react-' + name;
+	      fakeNode.addEventListener(evtType, boundFunc, false);
 	      var evt = document.createEvent('Event');
-	      evt.initEvent(name, false, false);
+	      evt.initEvent(evtType, false, false);
 	      fakeNode.dispatchEvent(evt);
-	      fakeNode.removeEventListener(name, boundFunc, false);
+	      fakeNode.removeEventListener(evtType, boundFunc, false);
 	    };
 	  }
 	}
@@ -4996,7 +4997,7 @@
 	var canDefineProperty = false;
 	if (process.env.NODE_ENV !== 'production') {
 	  try {
-	    Object.defineProperty({}, 'x', {});
+	    Object.defineProperty({}, 'x', { get: function () {} });
 	    canDefineProperty = true;
 	  } catch (x) {
 	    // IE will fail on defineProperty
@@ -10436,6 +10437,7 @@
 	    icon: null,
 	    id: MUST_USE_PROPERTY,
 	    inputMode: MUST_USE_ATTRIBUTE,
+	    integrity: null,
 	    is: MUST_USE_ATTRIBUTE,
 	    keyParams: MUST_USE_ATTRIBUTE,
 	    keyType: MUST_USE_ATTRIBUTE,
@@ -10795,6 +10797,7 @@
 	// For quickly matching children type, to test if can be treated as content.
 	var CONTENT_TYPES = { 'string': true, 'number': true };
 
+	var CHILDREN = keyOf({ children: null });
 	var STYLE = keyOf({ style: null });
 	var HTML = keyOf({ __html: null });
 
@@ -11285,7 +11288,9 @@
 	        }
 	        var markup = null;
 	        if (this._tag != null && isCustomComponent(this._tag, props)) {
-	          markup = DOMPropertyOperations.createMarkupForCustomAttribute(propKey, propValue);
+	          if (propKey !== CHILDREN) {
+	            markup = DOMPropertyOperations.createMarkupForCustomAttribute(propKey, propValue);
+	          }
 	        } else {
 	          markup = DOMPropertyOperations.createMarkupForProperty(propKey, propValue);
 	        }
@@ -11544,6 +11549,9 @@
 	      } else if (isCustomComponent(this._tag, nextProps)) {
 	        if (!node) {
 	          node = ReactMount.getNode(this._rootNodeID);
+	        }
+	        if (propKey === CHILDREN) {
+	          nextProp = null;
 	        }
 	        DOMPropertyOperations.setValueForAttribute(node, propKey, nextProp);
 	      } else if (DOMProperty.properties[propKey] || DOMProperty.isCustomAttribute(propKey)) {
@@ -18673,7 +18681,7 @@
 
 	'use strict';
 
-	module.exports = '0.14.1';
+	module.exports = '0.14.2';
 
 /***/ },
 /* 147 */
@@ -18751,6 +18759,16 @@
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) {
+	  for (var i = 1; i < arguments.length; i++) {
+	    var source = arguments[i];for (var key in source) {
+	      if (Object.prototype.hasOwnProperty.call(source, key)) {
+	        target[key] = source[key];
+	      }
+	    }
+	  }return target;
+	};
+
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
@@ -18768,12 +18786,19 @@
 	  return obj && obj.__esModule ? obj : { default: obj };
 	}
 
+	function _objectWithoutProperties(obj, keys) {
+	  var target = {};for (var i in obj) {
+	    if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];
+	  }return target;
+	}
+
 	var Link = function Link(_ref) {
 	  var children = _ref.children;
-	  var onClick = _ref.onClick;
 	  var url = _ref.url;
 
-	  return _react2.default.createElement('a', { href: url, onClick: onClick }, children);
+	  var props = _objectWithoutProperties(_ref, ['children', 'url']);
+
+	  return _react2.default.createElement('a', _extends({ href: url }, props), children);
 	};
 
 	var ConnectedLink = (0, _reactRedux.connect)(function () {
