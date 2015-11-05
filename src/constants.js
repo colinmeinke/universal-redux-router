@@ -1,3 +1,3 @@
-const UPDATE_URL = 'UPDATE_URL';
+const UPDATE_URL = '@@universalReduxRouter/updateUrl';
 
 export { UPDATE_URL };

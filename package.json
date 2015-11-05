@@ -1,6 +1,6 @@
 {
   "name": "universal-redux-router",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A very simple router for Redux and React that works on both server and client",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
