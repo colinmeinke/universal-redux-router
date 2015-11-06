@@ -5,11 +5,12 @@
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "scripts": {
-    "build": "npm run build:lib && npm run build:umd && npm run build:example",
+    "build": "npm run build:lib && npm run build:umd && npm run build:examples",
     "build:lib": "babel src --out-dir lib",
     "build:umd": "webpack ./src/index.js ./dist/universal-redux-router.js --output-library UniversalReduxRouter --output-library-target umd --config webpack.config.js",
-    "build:example": "webpack ./example/client.js ./example/client.dist.js --config webpack.config.js",
-    "start": "babel-node example/server.js",
+    "build:examples": "npm run build:examples:basic",
+    "build:examples:basic": "webpack ./examples/basic/client.js ./examples/basic/client.dist.js --config webpack.config.js",
+    "start:basic": "babel-node examples/basic/server.js",
     "test": "mocha --compilers js:babel-core/register test/*.js"
   },
   "author": {

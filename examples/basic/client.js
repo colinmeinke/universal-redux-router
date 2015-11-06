@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
-import { Router, updateUrl, urlReducer as url } from '../lib';
+import { Router, updateUrl, urlReducer as url } from '../../src';
 
 import routes from './common/routes';
 

@@ -5,7 +5,7 @@ import React from 'react';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import { connect, Provider } from 'react-redux';
 import { combineReducers, createStore } from 'redux';
-import { Router, updateUrl, urlReducer as url } from '../lib';
+import { Router, updateUrl, urlReducer as url } from '../../src';
 
 import routes from './common/routes';
 
@@ -43,15 +43,15 @@ const renderFullPage = ( app, initialState ) => {
 };
 
 app.get( '/react.js', ( req, res ) => {
-  res.sendFile( path.join( __dirname, '..', 'node_modules/react/dist/react.js' ));
+  res.sendFile( path.join( __dirname, '..', '..', 'node_modules/react/dist/react.js' ));
 });
 
 app.get( '/redux.js', ( req, res ) => {
-  res.sendFile( path.join( __dirname, '..', 'node_modules/redux/dist/redux.js' ));
+  res.sendFile( path.join( __dirname, '..', '..', 'node_modules/redux/dist/redux.js' ));
 });
 
 app.get( '/react-redux.js', ( req, res ) => {
-  res.sendFile( path.join( __dirname, '..', 'node_modules/react-redux/dist/react-redux.js' ));
+  res.sendFile( path.join( __dirname, '..', '..', 'node_modules/react-redux/dist/react-redux.js' ));
 });
 
 app.get( '/client.dist.js', ( req, res ) => {

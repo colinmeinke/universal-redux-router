@@ -47,8 +47,8 @@ const app = (
 );
 ```
 
-For a more complete example please look in
-[the example directory](./example/).
+For more complete examples please look in
+[the examples directory](./examples/).
 
 ## API
 

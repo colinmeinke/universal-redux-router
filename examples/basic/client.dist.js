@@ -56,7 +56,7 @@
 
 	var _redux = __webpack_require__(149);
 
-	var _lib = __webpack_require__(150);
+	var _src = __webpack_require__(150);
 
 	var _routes = __webpack_require__(156);
 
@@ -66,7 +66,7 @@
 
 	var initialState = window.__INITIAL_STATE__;
 
-	var reducer = (0, _redux.combineReducers)({ url: _lib.urlReducer });
+	var reducer = (0, _redux.combineReducers)({ url: _src.urlReducer });
 
 	var store = (0, _redux.createStore)(reducer, initialState);
 
@@ -77,13 +77,13 @@
 	  var search = _window$location.search;
 
 	  var url = pathname + search + hash;
-	  store.dispatch((0, _lib.updateUrl)(url));
+	  store.dispatch((0, _src.updateUrl)(url));
 	});
 
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRedux.Provider,
 	  { store: store },
-	  _react2.default.createElement(_lib.Router, { routes: _routes2.default })
+	  _react2.default.createElement(_src.Router, { routes: _routes2.default })
 	), document.querySelector('.app'));
 
 /***/ },
@@ -18743,9 +18743,7 @@
 
 	var _actions = __webpack_require__(152);
 
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { default: obj };
-	}
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.Link = _Link2.default;
 	exports.Router = _Router2.default;
@@ -18759,15 +18757,7 @@
 
 	'use strict';
 
-	var _extends = Object.assign || function (target) {
-	  for (var i = 1; i < arguments.length; i++) {
-	    var source = arguments[i];for (var key in source) {
-	      if (Object.prototype.hasOwnProperty.call(source, key)) {
-	        target[key] = source[key];
-	      }
-	    }
-	  }return target;
-	};
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -18782,15 +18772,9 @@
 
 	var _actions = __webpack_require__(152);
 
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { default: obj };
-	}
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _objectWithoutProperties(obj, keys) {
-	  var target = {};for (var i in obj) {
-	    if (keys.indexOf(i) >= 0) continue;if (!Object.prototype.hasOwnProperty.call(obj, i)) continue;target[i] = obj[i];
-	  }return target;
-	}
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
 	var Link = function Link(_ref) {
 	  var children = _ref.children;
@@ -18798,7 +18782,11 @@
 
 	  var props = _objectWithoutProperties(_ref, ['children', 'url']);
 
-	  return _react2.default.createElement('a', _extends({ href: url }, props), children);
+	  return _react2.default.createElement(
+	    'a',
+	    _extends({ href: url }, props),
+	    children
+	  );
 	};
 
 	var ConnectedLink = (0, _reactRedux.connect)(function () {
@@ -18871,9 +18859,7 @@
 
 	var _reactRedux = __webpack_require__(148);
 
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { default: obj };
-	}
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Router = function Router(_ref) {
 	  var routes = _ref.routes;
@@ -19108,7 +19094,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _lib = __webpack_require__(150);
+	var _src = __webpack_require__(150);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19117,17 +19103,17 @@
 	    'nav',
 	    null,
 	    _react2.default.createElement(
-	      _lib.Link,
+	      _src.Link,
 	      { url: '/' },
 	      'Home'
 	    ),
 	    _react2.default.createElement(
-	      _lib.Link,
+	      _src.Link,
 	      { url: '/about' },
 	      'About'
 	    ),
 	    _react2.default.createElement(
-	      _lib.Link,
+	      _src.Link,
 	      { url: '/hello?' + _queryString2.default.stringify({ name: 'Colin' }) },
 	      'Hello'
 	    )
