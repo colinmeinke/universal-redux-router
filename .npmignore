@@ -1,0 +1,6 @@
+.gitignore
+.travis.yml
+examples/
+src/
+test/
+webpack.config.js

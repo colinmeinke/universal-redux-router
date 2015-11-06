@@ -5,9 +5,13 @@
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "scripts": {
+    "clean": "rimraf lib dist",
     "build": "npm run build:lib && npm run build:umd",
     "build:lib": "babel src --out-dir lib",
-    "build:umd": "webpack ./src/index.js ./dist/universal-redux-router.js --output-library UniversalReduxRouter --output-library-target umd --config ./webpack.config.js",
+    "build:umd": "npm run build:umd:dev && npm run build:umd:pro",
+    "build:umd:dev": "webpack ./src/index.js ./dist/universal-redux-router.js --output-library UniversalReduxRouter --output-library-target umd --config ./webpack.config.js",
+    "build:umd:pro": "webpack -p ./src/index.js ./dist/universal-redux-router.min.js --output-library UniversalReduxRouter --output-library-target umd --config ./webpack.config.js",
+    "prepublish": "npm run clean && npm run build",
     "test": "mocha --compilers js:babel-core/register test/*.js"
   },
   "author": {
@@ -39,6 +43,7 @@
     "expect": "^1.12.2",
     "mocha": "^2.3.3",
     "react-addons-test-utils": "^0.14.2",
+    "rimraf": "^2.4.3",
     "webpack": "^1.12.3"
   },
   "peerDependencies": {
