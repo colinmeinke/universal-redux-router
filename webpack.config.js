@@ -4,7 +4,6 @@ module.exports = {
   externals: {
     react: 'React',
     'react-redux': 'ReactRedux',
-    redux: 'Redux',
   },
   module: {
     loaders: [{
