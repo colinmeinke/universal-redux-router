@@ -5,9 +5,11 @@ const Router = ({ routes, url }) => {
   return routes( url );
 };
 
-const ConnectedRouter = connect( state => ({
+const mapStateToProps = state => ({
   url: state.url,
-}))( Router );
+});
+
+const ConnectedRouter = connect( mapStateToProps )( Router );
 
 export { Router };
 export default ConnectedRouter;
