@@ -14,7 +14,7 @@ describe( 'reducer', () => {
       expect( urlReducer( '/initial-url', {
         type: UPDATE_URL,
         url,
-      })).toEqual( url )
+      })).toEqual( url );
     });
   });
 });
