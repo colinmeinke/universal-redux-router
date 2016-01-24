@@ -10,12 +10,21 @@ const Link = ({ children, url, ...props }) => (
   <a href={ url } { ...props }>{ children }</a>
 );
 
-const mapDispatchToProps = ( dispatch, { url }) => ({
+const mapDispatchToProps = ( dispatch, { onClick = null, shouldScrollToTop = true, url }) => ({
   onClick: e => {
     e.preventDefault();
+
+    if ( onClick ) {
+      onClick( e, dispatch );
+    }
+
     window.history.pushState({}, '', url );
+
     dispatch( updateUrl( url ));
-    scrollToTop();
+
+    if ( shouldScrollToTop ) {
+      scrollToTop();
+    }
   },
 });
 
