@@ -8,7 +8,7 @@ describe( 'component', () => {
   describe( '<Link />', () => {
     const props = {
       children: 'Hello world',
-      onClick: () => {},
+      onClick: () => ({}),
       style: { backgroundColor: 'rgb( 30, 30, 30 )' },
       url: '/hello-world',
     };
