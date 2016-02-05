@@ -14,7 +14,7 @@
     "build:umd:pro": "webpack -p ./src/index.js ./dist/universal-redux-router.min.js --output-library UniversalReduxRouter --output-library-target umd --config ./webpack.config.js",
     "lint": "eslint src test",
     "prepublish": "npm run clean && npm run build",
-    "test": "mocha --compilers js:babel-core/register test/*.js",
+    "test": "mocha --compilers js:babel-core/register test/**/*.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "author": {
@@ -41,14 +41,14 @@
     "babel-core": "^6.4.5",
     "babel-eslint": "^5.0.0-beta6",
     "babel-loader": "^6.2.0",
-    "babel-plugin-syntax-object-rest-spread": "^6.3.13",
+    "babel-plugin-transform-object-rest-spread": "^6.3.13",
     "babel-plugin-transform-react-jsx": "^6.4.0",
     "babel-preset-es2015": "^6.3.13",
     "commitizen": "^2.5.0",
     "cz-conventional-changelog": "^1.1.5",
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^4.0.0",
-    "eslint-config-spaced": "^2.0.0",
+    "eslint-config-spaced": "^2.0.1",
     "eslint-plugin-react": "^3.16.1",
     "expect": "^1.13.4",
     "mocha": "^2.4.5",
@@ -62,11 +62,12 @@
   },
   "peerDependencies": {
     "react": "^0.14.7",
+    "redux": "^3.1.2",
     "react-redux": "^4.1.1"
   },
   "babel": {
     "plugins": [
-      "syntax-object-rest-spread",
+      "transform-object-rest-spread",
       "transform-react-jsx"
     ],
     "presets": [

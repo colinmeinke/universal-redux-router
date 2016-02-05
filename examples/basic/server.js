@@ -1,45 +1,33 @@
 import express from 'express';
 import path from 'path';
-import qs from 'query-string';
 import React from 'react';
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
-import { connect, Provider } from 'react-redux';
-import { combineReducers, createStore } from 'redux';
-import { Router, updateUrl, urlReducer as url } from '../../src';
+import { Provider } from 'react-redux';
+import { changePageTo, Router } from '../../src';
 
 import routes from './common/routes';
+
+import createStore from './common/createStore';
 
 import Page from './common/components/Page';
 
 const app = express();
 
-const reducer = combineReducers({ url });
-
 const handleRender = ( req, res ) => {
-  const query = req.query ? `?${ qs.stringify( req.query )}` : null;
-
-  const store = createStore( reducer );
-
-  store.dispatch( updateUrl( req.path + query ));
+  const store = createStore({ isServer: true, url: req.url });
 
   res.send( renderFullPage(
     renderToString(
       <Provider store={ store }>
         <Router routes={ routes } />
       </Provider>
-    ),
-    store.getState()
+    )
   ));
 };
 
-const renderFullPage = ( app, initialState ) => {
+const renderFullPage = ( app ) => {
   return '<!DOCTYPE html>' +
-    renderToStaticMarkup(
-      <Page
-        app={ app }
-        initialState={ initialState }
-      />
-    );
+    renderToStaticMarkup( <Page app={ app } /> );
 };
 
 app.get( '/react.js', ( req, res ) => {

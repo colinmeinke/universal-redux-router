@@ -1,11 +1,9 @@
-import React from 'react';
-import Nav from './Nav';
+import { connect } from 'react-redux';
 
-const Hello = ({ name }) => (
-  <div>
-    <h1>Hello { name }</h1>
-    <Nav />
-  </div>
-);
+import Hello from './Hello/index';
 
-export default Hello;
+const mapStateToProps = ({ name }) => ({ name });
+
+const HelloContainer = connect( mapStateToProps )( Hello );
+
+export default HelloContainer;

@@ -1,22 +1,16 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { combineReducers, createStore } from 'redux';
-import { Router, updateUrl, urlReducer as url } from '../../src';
+import { Router } from '../../src';
 
 import routes from './common/routes';
 
-const initialState = window.__INITIAL_STATE__;
+import createStore from './common/createStore';
 
-const reducer = combineReducers({ url });
+const { hash, pathname, search } = window.location;
+const url = pathname + search + hash;
 
-const store = createStore( reducer, initialState );
-
-window.addEventListener( 'popstate', () => {
-  const { hash, pathname, search } = window.location;
-  const url = pathname + search + hash;
-  store.dispatch( updateUrl( url ));
-});
+const store = createStore({ url });
 
 render(
   <Provider store={ store }>

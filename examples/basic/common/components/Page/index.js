@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Page = ({ app, initialState }) => {
+const Page = ({ app }) => {
   return (
     <html lang="en">
       <head>
@@ -11,9 +11,6 @@ const Page = ({ app, initialState }) => {
         <section
           className="app"
           dangerouslySetInnerHTML={{ __html: app }}
-        />
-        <script
-          dangerouslySetInnerHTML={{ __html: `window.__INITIAL_STATE__ = ${ JSON.stringify( initialState )}` }}
         />
         <script defer src="/react.js" />
         <script defer src="/redux.js" />
