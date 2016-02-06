@@ -8,9 +8,11 @@ const router = ( routes, { isServer = false } = {}) => ({ dispatch }) => {
   }
 
   return next => initialAction => {
-    const { options: { shouldAddToHistory }, to, type } = initialAction;
+    const { type } = initialAction;
 
     if ( type === CHANGE_PAGE_TO ) {
+      const { options: { shouldAddToHistory }, to } = initialAction;
+
       const action = getAction( to, routes );
 
       if ( !isServer && shouldAddToHistory ) {
