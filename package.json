@@ -1,7 +1,7 @@
 {
   "name": "universal-redux-router",
   "version": "0.0.0-semantically-released",
-  "description": "A very simple router for Redux and React that works on both server and client",
+  "description": "A router that turns URL params into first-class Redux state",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "scripts": {
