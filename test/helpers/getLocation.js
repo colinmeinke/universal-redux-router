@@ -103,6 +103,18 @@ describe( 'helper', () => {
       const expectedQueryString = '?with=a&query=string';
       expect( getQueryString( query )).toBe( expectedQueryString );
     });
+
+    it( 'should work with a query item that is an array', () => {
+      const query = { foo: [ 'bar', 'baz' ]};
+      const expectedQueryString = '?foo%5B%5D=bar,baz';
+      expect( getQueryString( query )).toBe( expectedQueryString );
+    });
+
+    it( 'should work with a query item that is an object', () => {
+      const query = { foo: { bar: 'baz' }};
+      const expectedQueryString = '?foo%5Bbar%5D=baz';
+      expect( getQueryString( query )).toBe( expectedQueryString );
+    });
   });
 
   describe( 'getLocation()', () => {
