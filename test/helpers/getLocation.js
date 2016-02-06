@@ -85,6 +85,18 @@ describe( 'helper', () => {
     });
 
     it( 'should work with an array of multiple path parts including a query object', () => {
+      const to = '/?foo%5B%5D=bar,baz';
+      const expectedQuery = { foo: [ 'bar', 'baz' ]};
+      expect( getQuery( to )).toEqual( expectedQuery );
+    });
+
+    it( 'should work when the query object includes an array', () => {
+      const to = '/?foo%5Bbar%5D=baz';
+      const expectedQuery = { foo: { bar: 'baz' }};
+      expect( getQuery( to )).toEqual( expectedQuery );
+    });
+
+    it( 'should work when the query object includes an object', () => {
       const to = [ 'hello', 'world', { with: 'a', query: 'string' }];
       const expectedQuery = { with: 'a', query: 'string' };
       expect( getQuery( to )).toEqual( expectedQuery );
