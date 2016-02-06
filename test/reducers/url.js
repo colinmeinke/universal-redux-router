@@ -4,7 +4,7 @@ import urlReducer from '../../src/reducers/url';
 import { UPDATE_URL } from '../../src/constants';
 
 describe( 'reducer', () => {
-  describe( 'urlReducer()', () => {
+  describe( 'url()', () => {
     it( 'should return the default state by default', () => {
       expect( urlReducer()).toEqual( '/' );
     });
