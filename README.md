@@ -177,6 +177,15 @@ const state = getState( url, routes, reducer );
 const store = createStore( reducer, state, middleware );
 ```
 
+## Help make this better
+
+[Issues](https://github.com/colinmeinke/universal-redux-router/issues/new)
+and pull requests gratefully received!
+
+I'm also on twitter [@colinmeinke](https://twitter.com/colinmeinke).
+
+Thanks :star2:
+
 ## Thanks to
 
 - [Henrik Joreteg](https://twitter.com/HenrikJoreteg)'s [article on minimalist routing](https://gist.github.com/HenrikJoreteg/530c1da6a5e0ff9bd9ad)
