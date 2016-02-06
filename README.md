@@ -91,7 +91,8 @@ stack. This listens for the `CHANGE_PAGE_TO` action, matches a
 route and then makes a list of additional actions we need to
 dispatch.
 
-It also handles browser history.
+It also includes a few conveniences like updating scroll
+position on navigation and handling browser history.
 
 ```js
 import { routerMiddleware } from 'universal-redux-router';
@@ -144,9 +145,6 @@ The `Link` component is used to create an HTML anchor element
 that has `changePageTo` handling built in. This means you
 don't have to worry about `onClick` events or having to
 directly call `changePageTo`.
-
-It also includes a few conveniences like updating scroll
-position on navigation.
 
 Like `changePageTo` it accepts both an array of data or a URL
 string as its `to` prop.
