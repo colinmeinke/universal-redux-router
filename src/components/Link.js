@@ -5,22 +5,14 @@ import changePageTo from '../actions/changePageTo';
 import getLocation from '../helpers/getLocation';
 
 const defaultProps = {
+  shouldAddToHistory: true,
   shouldScrollToTop: true,
 };
 
-const scrollToTop = () => {
-  document.documentElement.scrollTop = document.body.scrollTop = 0;
-};
-
-const Link = ({ children, dispatch, shouldScrollToTop, to, ...props }) => {
+const Link = ({ children, dispatch, shouldAddToHistory, shouldScrollToTop, to, ...props }) => {
   const onClick = e => {
     e.preventDefault();
-
-    dispatch( changePageTo( to ));
-
-    if ( shouldScrollToTop ) {
-      scrollToTop();
-    }
+    dispatch( changePageTo( to, { shouldAddToHistory, shouldScrollToTop }));
   };
 
   return (
