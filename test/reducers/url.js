@@ -9,7 +9,7 @@ describe( 'reducer', () => {
       expect( urlReducer()).toEqual( '/' );
     });
 
-    it( 'should handle UPDATE_URL action type', () => {
+    it( 'should handle update url action type', () => {
       const url = '/hello-world';
 
       expect( urlReducer( '/initial-url', {
