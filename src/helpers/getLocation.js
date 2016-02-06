@@ -109,14 +109,22 @@ const getQueryString = query => {
         const objParts = Object.keys( query[ k ]).map( objKey => {
           const key = encode( `${ k }[${ objKey }]` );
           const value = encode( query[ k ][ objKey ]);
-          return `${ key }=${ value }`;
-        });
 
-        return objParts.length ? `${ objParts.join( '&' )}` : '';
+          if ( value.length ) {
+            return `${ key }=${ value }`;
+          }
+
+          return null;
+        }).filter( part => part !== null );
+
+        return objParts.length ? `${ objParts.join( '&' )}` : null;
       } else {
         const key = encode( `${ k }` );
         const value = encode( query[ k ]);
-        return `${ key }=${ value }`;
+
+        if ( value.length ) {
+          return `${ key }=${ value }`;
+        }
       }
 
       return null;

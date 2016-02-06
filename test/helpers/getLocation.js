@@ -134,6 +134,18 @@ describe( 'helper', () => {
       expect( getQueryString( query )).toBe( expectedQueryString );
     });
 
+    it( 'should work with an query item that has an empty value', () => {
+      const query = { foo: '' };
+      const expectedQueryString = '';
+      expect( getQueryString( query )).toBe( expectedQueryString );
+    });
+
+    it( 'should work with an query item that is an object and has an empty value', () => {
+      const query = { foo: { bar: '' }};
+      const expectedQueryString = '';
+      expect( getQueryString( query )).toBe( expectedQueryString );
+    });
+
     it( 'should encode special characters', () => {
       const query = { test: 'Rock & Roll' };
       const expectedQueryString = '?test=Rock+%26+Roll';
