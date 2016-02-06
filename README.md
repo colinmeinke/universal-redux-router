@@ -17,9 +17,9 @@ as part of the path name or within the query string.
 ```
 
 *Note*: The `%5B%5D` part is encoded square brackets `[]`
-which we use to denote that a query param is an array.
+that we use to denote that a query param is an array.
 
-In the above example we have the following state:
+In the above example, we have the following state:
 
 ```js
 {
@@ -32,7 +32,7 @@ In the above example we have the following state:
 
 Wouldn't it be cool if this state could automatically be
 extracted from the URL and added as first-class state to your
-Redux store.
+Redux store?
 
 **Enter Universal Redux Router**.
 
@@ -45,11 +45,11 @@ const routes = [
 ];
 ```
 
-In the above example we have one route defined that will match
-`/users/<anything>/posts`. It has three Redux action creators
-attached `updateId`, `updatePage` and `updateTags`.
+In the above example, we have one route defined that will
+match `/users/<anything>/posts`. It has three Redux action
+creators attached `updateId`, `updatePage` and `updateTags`.
 
-When a user navigates to a URL the action creators associated
+When a user navigates to a URL, the action creators associated
 with the matching route are called with either the appropriate
 part of the path name or the matching value of the query
 string.
@@ -104,7 +104,7 @@ return createStore( reducer, state, middleware );
 ### routerReducer
 
 Instead of using Redux's `combineReducers` to create your
-root reducer you must use `routerReducer`. It has the same
+root reducer, you must use `routerReducer`. It has the same
 API as `combineReducers`.
 
 `routerReducer` uses `combineReducers` under the hood for all
@@ -168,8 +168,8 @@ import { Link } from 'universal-redux-router';
 The `getState` helper means you don't have to pass initial
 state between server and client.
 
-It can calculate initial state for you to pass in when you
-create a Redux store.
+It calculates initial state that you can use when creating
+your Redux store.
 
 ```js
 import { getState } from 'universal-redux-router';
