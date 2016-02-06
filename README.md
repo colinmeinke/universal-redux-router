@@ -5,6 +5,7 @@ A router that turns URL params into first-class Redux state.
 ---
 
 ![Test status](https://img.shields.io/travis/colinmeinke/universal-redux-router.svg)
+![Dependencies status](https://img.shields.io/david/colinmeinke/universal-js.svg)
 
 ## Motivation
 
