@@ -5,8 +5,6 @@ import { CHANGE_PAGE_TO, UPDATE_URL } from '../../src/constants';
 
 describe( 'reducer', () => {
   describe( 'router()', () => {
-    const UPDATE_PAGE = 'UPDATE_PAGE';
-
     const pageReducer = ( state = 1, { page }) => ( parseInt( page || state, 10 ));
 
     const reducers = {
