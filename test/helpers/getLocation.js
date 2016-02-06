@@ -89,6 +89,12 @@ describe( 'helper', () => {
       const expectedQuery = { with: 'a', query: 'string' };
       expect( getQuery( to )).toEqual( expectedQuery );
     });
+
+    it( 'should decode special characters', () => {
+      const to = '/hello/world?test=Rock+%26+Roll';
+      const expectedQuery = { test: 'Rock & Roll' };
+      expect( getQuery( to )).toEqual( expectedQuery );
+    });
   });
 
   describe( 'getQueryString()', () => {
@@ -113,6 +119,12 @@ describe( 'helper', () => {
     it( 'should work with a query item that is an object', () => {
       const query = { foo: { bar: 'baz' }};
       const expectedQueryString = '?foo%5Bbar%5D=baz';
+      expect( getQueryString( query )).toBe( expectedQueryString );
+    });
+
+    it( 'should encode special characters', () => {
+      const query = { test: 'Rock & Roll' };
+      const expectedQueryString = '?test=Rock+%26+Roll';
       expect( getQueryString( query )).toBe( expectedQueryString );
     });
   });
