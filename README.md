@@ -149,7 +149,7 @@ It also includes a few conveniences like updating scroll
 position on navigation.
 
 Like `changePageTo` it accepts both an array of data or a URL
-string as its `to` prop. 
+string as its `to` prop.
 
 ```js
 import { Link } from 'universal-redux-router';
@@ -183,7 +183,7 @@ const store = createStore( reducer, state, middleware );
 
 - [Henrik Joreteg](https://twitter.com/HenrikJoreteg)'s [article on minimalist routing](https://gist.github.com/HenrikJoreteg/530c1da6a5e0ff9bd9ad)
 - [React Router](https://github.com/rackt/react-router) (specifically for the [Link API](https://github.com/rackt/react-router/blob/master/modules/Link.js))
-- [Luke Morton](https://twitter.com/lukemorton) for discussions around routing [Republic](https://github.com/lukemorton/republic)
+- [Luke Morton](https://twitter.com/lukemorton) for discussions around routing and [Republic](https://github.com/lukemorton/republic)
 
 ## License
 
