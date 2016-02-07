@@ -14,11 +14,8 @@ linked to with a URL. These URLs often contain state either
 as part of the path name or within the query string.
 
 ```
-/users/782/posts?page=2&tags%5B%5D=coding,making
+/users/782/posts?page=2&tags[]=coding,making
 ```
-
-*Note*: The `%5B%5D` part is encoded square brackets `[]`
-that we use to denote that a query param is an array.
 
 In the above example, we have the following state:
 
@@ -27,7 +24,6 @@ In the above example, we have the following state:
   id: 782,
   page: 2,
   tags: [ 'coding', 'making' ],
-  url: '/users/782/posts?page=2&tags%5B%5D=coding,making',
 }
 ```
 
