@@ -10,17 +10,24 @@ describe( 'helper', () => {
     it( 'should get to url and associated route actions', () => {
       const actionFoo = () => ({ type: 'FOO' });
       const actionBar = () => ({ type: 'BAR' });
+      const actionBaz = () => ({ type: 'BAZ' });
 
       const to = [ 'hello', 'world' ];
 
       const routes = [
-        [ 'hello', 'world', { foo: actionFoo, bar: actionBar }, <p>Hello world</p> ],
+        [
+          'hello',
+          'world',
+          { foo: actionFoo, bar: actionBar, after: [ actionBaz ]},
+          <p>Hello world</p>,
+        ],
       ];
 
       const url = '/hello/world';
 
       const expectedAction = {
         actions: [ updateUrl( url ), actionFoo(), actionBar() ],
+        after: [ actionBaz ],
         type: CHANGE_PAGE_TO,
         url,
       };

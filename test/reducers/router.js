@@ -39,6 +39,7 @@ describe( 'reducer', () => {
 
       expect( reducer({}, {
         actions: [{ type: UPDATE_URL, url: '/hello/world' }, { page: undefined }],
+        after: [],
         to: [ 'hello', 'world' ],
         type: CHANGE_PAGE_TO,
       })).toEqual( expectedState );
