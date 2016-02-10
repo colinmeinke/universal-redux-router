@@ -44,5 +44,30 @@ describe( 'reducer', () => {
         type: CHANGE_PAGE_TO,
       })).toEqual( expectedState );
     });
+
+    it( 'should use after action creator when change page to action type', () => {
+      const resultsActionCreator = () => ({
+        results: [ 'hello', 'world' ],
+      });
+
+      const resultsReducer = ( state = [], { results }) => ( results || state );
+
+      const newReducers = { ...reducers, results: resultsReducer };
+
+      const newReducer = routerReducer( newReducers );
+
+      const expectedState = {
+        page: 1,
+        results: [ 'hello', 'world' ],
+        url: '/hello/world',
+      };
+
+      expect( newReducer({}, {
+        actions: [{ type: UPDATE_URL, url: '/hello/world' }, { page: undefined }],
+        after: [ resultsActionCreator ],
+        to: [ 'hello', 'world' ],
+        type: CHANGE_PAGE_TO,
+      })).toEqual( expectedState );
+    });
   });
 });
