@@ -169,9 +169,9 @@ your Redux store.
 ```js
 import { getState } from 'universal-redux-router';
 
-const state = getState( url, routes, reducer );
-
-const store = createStore( reducer, state, middleware );
+getState( url, routes, reducer ).then( state => {
+  const store = createStore( reducer, state, middleware );
+});
 ```
 
 ## Help make this better

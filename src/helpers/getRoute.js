@@ -42,7 +42,7 @@ const getParams = ( routePath, pathName ) => {
   const values = pathName.split( '/' );
 
   keys.forEach(( k, i ) => {
-    if ( k.startsWith( ':' )) {
+    if ( k.startsWith( ':' ) && values[ i ]) {
       params[ k.substr( 1 ) ] = values[ i ];
     }
   });

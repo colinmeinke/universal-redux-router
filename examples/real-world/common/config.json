@@ -1,0 +1,69 @@
+{
+  "countries": [
+    "japan",
+    "mexico",
+    "vietnam"
+  ],
+  "dishes": [
+    {
+      "country": "japan",
+      "isVegetarian": true,
+      "name": "Okonomiyaki"
+    },
+    {
+      "country": "japan",
+      "isVegetarian": false,
+      "name": "Tonkotsu Ramen"
+    },
+    {
+      "country": "japan",
+      "isVegetarian": true,
+      "name": "Tempura Udon"
+    },
+    {
+      "country": "japan",
+      "isVegetarian": true,
+      "name": "Onigiri"
+    },
+    {
+      "country": "mexico",
+      "isVegetarian": true,
+      "name": "Gorditas con Nopal"
+    },
+    {
+      "country": "mexico",
+      "isVegetarian": false,
+      "name": "Tacos de Camarón"
+    },
+    {
+      "country": "mexico",
+      "isVegetarian": true,
+      "name": "Huevos Rancheros"
+    },
+    {
+      "country": "mexico",
+      "isVegetarian": false,
+      "name": "Cochinita Pibil"
+    },
+    {
+      "country": "vietnam",
+      "isVegetarian": false,
+      "name": "Bún Bò Huế"
+    },
+    {
+      "country": "vietnam",
+      "isVegetarian": false,
+      "name": "Bún Riêu"
+    },
+    {
+      "country": "vietnam",
+      "isVegetarian": false,
+      "name": "Phở"
+    },
+    {
+      "country": "vietnam",
+      "isVegetarian": true,
+      "name": "Gỏi Cuốn"
+    }
+  ]
+}

@@ -1,30 +1,30 @@
-import getLocation from '../helpers/getLocation';
-import getRoute from '../helpers/getRoute';
+import getLocation from './getLocation';
+import getRoute from './getRoute';
 import updateUrl from '../actions/updateUrl';
 import { CHANGE_PAGE_TO } from '../constants';
+import { getResolvedActionCreators } from './resolveActionCreator';
 
-const getActions = ( url, actionCreators, data ) => {
-  const actions = [
-    updateUrl( url ),
-  ];
+const getActions = ( url, actionCreators, data ) => new Promise(( resolve, reject ) => {
+  const actionCreatorsMap = new Map();
 
-  const keys = Object.keys( actionCreators );
+  actionCreatorsMap.set( updateUrl, url );
 
-  keys.forEach( k => {
+  Object.keys( actionCreators ).forEach( k => {
     if ( k !== 'after' ) {
       if ( Array.isArray( actionCreators[ k ])) {
         actionCreators[ k ].forEach( actionCreator => {
-          actions.push( actionCreator( data[ k ]));
+          actionCreatorsMap.set( actionCreator, data[ k ]);
         });
       } else {
-        const actionCreator = actionCreators[ k ];
-        actions.push( actionCreator( data[ k ]));
+        actionCreatorsMap.set( actionCreators[ k ], data[ k ]);
       }
     }
   });
 
-  return actions;
-};
+  Promise.all( getResolvedActionCreators( actionCreatorsMap ))
+    .then( resolve )
+    .catch( reject );
+});
 
 const getAfter = actionCreators => {
   const after = [];
@@ -42,24 +42,18 @@ const getAfter = actionCreators => {
   return after;
 };
 
-const getAction = ( to, routes ) => {
+const getAction = ( to, routes ) => new Promise(( resolve, reject ) => {
   const { query, url } = getLocation( to );
   const { actionCreators, params } = getRoute( url, routes );
 
-  const actions = getActions(
-    url,
-    actionCreators,
-    { ...query, ...params }
-  );
-
-  const after = getAfter( actionCreators );
-
-  return {
-    actions,
-    after,
-    type: CHANGE_PAGE_TO,
-    url,
-  };
-};
+  getActions( url, actionCreators, { ...query, ...params })
+    .then( actions => resolve({
+      actions,
+      after: getAfter( actionCreators ),
+      type: CHANGE_PAGE_TO,
+      url,
+    }))
+    .catch( reject );
+});
 
 export default getAction;

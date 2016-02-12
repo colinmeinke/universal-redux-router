@@ -1,36 +1,57 @@
 import getAction from '../helpers/getAction';
 import popStateListener from '../helpers/popStateListener';
-import { CHANGE_PAGE_TO } from '../constants';
+import { AFTER_CHANGE_PAGE_TO, CHANGE_PAGE_TO } from '../constants';
+import { resolveActionCreator } from '../helpers/resolveActionCreator';
+
+const getAfterAction = a => {
+  const after = [ ...a ];
+  const actionCreator = after.shift();
+  return { actionCreator, after, type: AFTER_CHANGE_PAGE_TO };
+};
 
 const scrollToTop = () => {
   document.documentElement.scrollTop = document.body.scrollTop = 0;
 };
 
-const router = ( routes, { isServer = false } = {}) => ({ dispatch }) => {
+const router = ( routes, { isServer = false } = {}) => ({ dispatch, getState }) => {
   if ( !isServer ) {
     popStateListener( dispatch );
   }
 
-  return next => initialAction => {
-    const { type } = initialAction;
+  return next => action => {
+    if ( action.type === CHANGE_PAGE_TO ) {
+      const { options: { shouldAddToHistory, shouldScrollToTop }, to } = action;
 
-    if ( type === CHANGE_PAGE_TO ) {
-      const { options: { shouldAddToHistory, shouldScrollToTop }, to } = initialAction;
+      return getAction( to, routes ).then( newAction => {
+        if ( !isServer && shouldAddToHistory ) {
+          window.history.pushState({}, '', newAction.url );
+        }
 
-      const action = getAction( to, routes );
+        if ( shouldScrollToTop ) {
+          scrollToTop();
+        }
 
-      if ( !isServer && shouldAddToHistory ) {
-        window.history.pushState({}, '', action.url );
-      }
+        const result = next( newAction );
 
-      if ( shouldScrollToTop ) {
-        scrollToTop();
-      }
+        if ( newAction.after.length ) {
+          dispatch( getAfterAction( newAction.after ));
+        }
 
-      return next( action );
+        return result;
+      }).catch( console.error );
+    } else if ( action.type === AFTER_CHANGE_PAGE_TO ) {
+      return resolveActionCreator( action.actionCreator, getState()).then( newAction => {
+        const result = next( newAction );
+
+        if ( action.after.length ) {
+          dispatch( getAfterAction( action.after ));
+        }
+
+        return result;
+      }).catch( console.error );
     }
 
-    return next( initialAction );
+    return next( action );
   };
 };
 

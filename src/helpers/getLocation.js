@@ -33,6 +33,14 @@ const encode = value => (
   ), value.toString())
 );
 
+const getValue = value => {
+  if ([ 'true', 'false' ].indexOf( value ) !== -1 ) {
+    return value === 'true';
+  }
+
+  return decode( value );
+};
+
 const parseQueryString = queryString => {
   const query = {};
   const queryParts = queryString.split( '&' );
@@ -48,10 +56,10 @@ const parseQueryString = queryString => {
 
       if ( query.hasOwnProperty( rootKey )) {
         value.split( /[,]+/ ).forEach( v => {
-          query[ rootKey ].push( decode( v ));
+          query[ rootKey ].push( getValue( v ));
         });
       } else {
-        query[ rootKey ] = value.split( /[,]+/ ).map( decode );
+        query[ rootKey ] = value.split( /[,]+/ ).map( getValue );
       }
     } else if ( isObject ) {
       const rootKey = key.replace( /%5B(.*)%5D/, '' );
@@ -61,9 +69,9 @@ const parseQueryString = queryString => {
         query[ rootKey ] = {};
       }
 
-      query[ rootKey ][ objectKey ] = decode( value );
+      query[ rootKey ][ objectKey ] = getValue( value );
     } else {
-      query[ key ] = decode( value );
+      query[ key ] = getValue( value );
     }
   });
 
@@ -80,7 +88,7 @@ const getQuery = to => {
       }
     }
   } else {
-    const url = to.toString();
+    const url = to.toString().replace( /\?$/, '' );
 
     if ( url.includes( '?' )) {
       const [ , queryString ] = url.split( '?' );
@@ -155,7 +163,6 @@ const getPathName = to => {
 
   const url = to.toString();
   const [ pathName ] = url.split( '?' );
-
   return `/${ pathName.replace( /(^\/|\/$)/, '' )}`;
 };
 

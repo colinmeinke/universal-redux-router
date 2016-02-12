@@ -7,7 +7,7 @@ import { CHANGE_PAGE_TO } from '../../src/constants';
 
 describe( 'helper', () => {
   describe( 'getAction()', () => {
-    it( 'should get to url and associated route actions', () => {
+    it( 'should get to url and associated route actions', done => {
       const actionFoo = () => ({ type: 'FOO' });
       const actionBar = () => ({ type: 'BAR' });
       const actionBaz = () => ({ type: 'BAZ' });
@@ -32,7 +32,10 @@ describe( 'helper', () => {
         url,
       };
 
-      expect( getAction( to, routes )).toEqual( expectedAction );
+      getAction( to, routes ).then( action => {
+        expect( action ).toEqual( expectedAction );
+        done();
+      });
     });
   });
 });

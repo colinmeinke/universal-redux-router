@@ -27,7 +27,7 @@ describe( 'middleware', () => {
       expect( router({ dispatch })( next )( action )).toEqual( action );
     });
 
-    it( 'should add correct actions and url props to change page to action', () => {
+    it( 'should add correct actions and url props to change page to action', done => {
       const action = {
         options: { shouldAddToHistory: false },
         to: [ 'hello', 'world' ],
@@ -40,8 +40,14 @@ describe( 'middleware', () => {
 
       const result = router({ dispatch })( next )( action );
 
-      expect( result.actions ).toEqual( actions );
-      expect( result.url ).toEqual( url );
+      setTimeout(() => {
+        result.then(({ a, u }) => {
+          expect( a ).toEqual( actions );
+          expect( u ).toEqual( url );
+        });
+
+        done();
+      }, 0 );
     });
   });
 });

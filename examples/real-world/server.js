@@ -5,13 +5,28 @@ import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { changePageTo, Router } from '../../src';
 
-import routes from './common/routes';
-
 import configureStore from './common/configureStore';
+import routes from './common/routes';
+import { dishes } from './common/config';
 
 import Page from './common/components/Page';
 
 const app = express();
+
+const handleApi = ( req, res, next ) => {
+  const { country, isVegetarian = 'false' } = req.query;
+
+  if ( req.url.includes( '/api/' )) {
+    const filteredDishes = dishes.filter( dish => (
+      ( country === dish.country ) &&
+      ( isVegetarian === 'false' || ( isVegetarian === 'true' && dish.isVegetarian ))
+    ));
+
+    res.json({ dishes: filteredDishes });
+  } else {
+    next();
+  }
+};
 
 const handleRender = ( req, res ) => {
   configureStore({ isServer: true, url: req.url }).then( store => {
@@ -46,6 +61,7 @@ app.get( '/client.dist.js', ( req, res ) => {
   res.sendFile( `${ __dirname }/client.dist.js` );
 });
 
+app.use( handleApi );
 app.use( handleRender );
 
 app.listen( 3000, () => {
