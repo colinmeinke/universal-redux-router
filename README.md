@@ -262,7 +262,7 @@ does on a `CHANGE_PAGE_TO` action, but without any `dispatch`
 calls, and therefore without the need for a Redux store.
 
 This means we can use it to calculate the initial state
-for our Redux store.
+to create our Redux store.
 
 We can also use it on both server and client to avoid passing
 state between the two.
