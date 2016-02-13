@@ -257,11 +257,15 @@ import { Link } from 'universal-redux-router';
 
 ### getState
 
-The `getState` helper means you don't have to pass initial
-state between server and client.
+The `getState` helper does exactly what the the router
+does on a `CHANGE_PAGE_TO` action, but without any `dispatch`
+calls, and therefore without the need for a Redux store.
 
-It calculates initial state that you can use when creating
-your Redux store.
+This means we can use it to calculate the initial state
+for our Redux store.
+
+We can also use it on both server and client to avoid passing
+state between the two.
 
 ```js
 import { getState } from 'universal-redux-router';
