@@ -1,7 +1,7 @@
 {
   "name": "universal-redux-router",
   "version": "0.0.0-semantically-released",
-  "description": "A router that turns URL params into first-class Redux state",
+  "description": "A router that turns URL params into first-class Redux state and runs action creators on navigation",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
   "scripts": {

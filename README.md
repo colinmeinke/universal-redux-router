@@ -1,11 +1,33 @@
 # Universal Redux Router
 
-A router that turns URL params into first-class Redux state.
+A router that turns URL params into first-class Redux state
+and runs action creators on navigation.
 
 ---
 
 ![Test status](https://img.shields.io/travis/colinmeinke/universal-redux-router.svg)
 ![Dependencies status](https://img.shields.io/david/colinmeinke/universal-js.svg)
+
+## Navigation
+
+- [Motivation](#motivation)
+- [Features](#features)
+  - [Extracts state from URLs](#extracts-state-from-urls)
+  - [Runs action creators *after* calculating new state](#runs-action-creators-after-calculating-new-state)
+  - [Handles async action creators](#handles-async-action-creators)
+  - [Routing on server and client](#routing-on-server-and-client)
+- [Examples](#examples)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Router](#router)
+  - [routerMiddleware](#routermiddleware)
+  - [routerReducer](#routerreducer)
+  - [changePageTo](#changepageto)
+  - [Link](#link)
+  - [getState](#getstate)
+- [Help make this better](#help-make-this-better)
+- [Thanks](#thanks)
+- [License](#license)
 
 ## Motivation
 
@@ -27,18 +49,29 @@ In the above example, we have the following state:
 }
 ```
 
-Wouldn't it be cool if this state could automatically be
-extracted from the URL and added as first-class state to your
-Redux store?
+**I want that state in my Redux store!**
 
-**Enter Universal Redux Router**.
+## Features
+
+### Extracts state from URLs
+
+Universal Redux Router extracts state from a URL and adds it
+as first-class state to your Redux store.
 
 It achieves this by allowing you to attach Redux action
 creators to your routes.
 
 ```js
 const routes = [
-  [ 'users/:id/posts', { id: updateId, page: updatePage, tags: updateTags }, <UsersPosts /> ],
+  [
+    'users/:id/posts',
+    {
+      id: updateId,
+      page: updatePage,
+      tags: updateTags,
+    },
+    <UsersPosts />,
+  ],
 ];
 ```
 
@@ -47,12 +80,76 @@ match `/users/<anything>/posts`. It has three Redux action
 creators attached `updateId`, `updatePage` and `updateTags`.
 
 When a user navigates to a URL, the action creators associated
-with the matching route are called with either the appropriate
-part of the path name or the matching value of the query
-string.
+with the matching route are called with the appropriate part
+of the URL.
 
-The returned actions are then batched and dispatched, updating
-the state of the Redux store.
+For example, navigating to
+`/users/782/posts?page=2&tags[]=coding,making` will result in
+the following function calls:
+
+- `updateId( '782' )`
+- `updatePage( '2' )`
+- `updateTags([ 'coding', 'making' ])`
+
+The returned actions are then used to calculate the new state
+of the Redux store.
+
+### Runs action creators *after* calculating new state
+
+On top of running action creators to extract state from URL
+params, Universal Redux Router allows you to define action
+creators to run *after* the new state has been calculated.
+
+```js
+const routes = [
+  [
+    'users/:id/posts',
+    {
+      id: updateId,
+      page: updatePage,
+      tags: updateTags,
+      after: [ postsUpdating, getPosts, postsUpdated ],
+    },
+    <UsersPosts />,
+  ],
+];
+```
+
+In the above example the action creators `updateId`, `updatePage`
+and `updateTags` are run first. The returned actions are used to
+calculate the new state.
+
+The `after` action creators are then run in sequence, each called
+in turn with the updated state.
+
+### Handles async action creators
+
+Both URL param action creators and `after` action creators can
+return promises.
+
+The `after` action creators will not be called until all URL
+param action creators have resolved and the new state has been
+calculated.
+
+Each one of the `after` action creators will not be called
+until the previous `after` action creator has been resolved
+and the new state calculated.
+
+### Routing on server and client
+
+As the name implies, Universal Redux Router is designed
+specifically to work the same on both server and client.
+
+No need for environment specific code. Phew!
+
+## Examples
+
+- The [basic example](./examples/basic) in the examples
+  directory of this repository.
+- The [real world example](./examples/real-world) in the
+  examples directory of this repository.
+- [My React/Redux starter kit](https://github.com/colinmeinke/universal-js).
+- [My blog](https://github.com/colinmeinke/colinmeinke).
 
 ## Installation
 
@@ -183,7 +280,7 @@ I'm also on twitter [@colinmeinke](https://twitter.com/colinmeinke).
 
 Thanks :star2:
 
-## Thanks to
+## Thanks
 
 - [Henrik Joreteg](https://twitter.com/HenrikJoreteg)'s [article on minimalist routing](https://gist.github.com/HenrikJoreteg/530c1da6a5e0ff9bd9ad)
 - [React Router](https://github.com/rackt/react-router) (specifically for the [Link API](https://github.com/rackt/react-router/blob/master/modules/Link.js))
