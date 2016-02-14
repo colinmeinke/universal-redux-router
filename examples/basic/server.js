@@ -22,7 +22,7 @@ const handleRender = ( req, res ) => {
         </Provider>
       )
     ));
-  }).catch( console.error );
+  }).catch( console.error.bind( console ));
 };
 
 const renderFullPage = ( app ) => {

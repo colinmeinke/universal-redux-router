@@ -17,4 +17,4 @@ configureStore({ url }).then( store => {
     </Provider>,
     document.querySelector( '.app' )
   );
-}).catch( console.error );
+}).catch( console.error.bind( console ));
