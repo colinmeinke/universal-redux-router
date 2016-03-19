@@ -125,7 +125,7 @@ const getQueryString = query => {
           return null;
         }).filter( part => part !== null );
 
-        return objParts.length ? `${ objParts.join( '&' )}` : null;
+        return objParts.length ? `${ objParts.join( '&' ) }` : null;
       } else {
         const key = encode( `${ k }` );
         const value = encode( query[ k ]);
@@ -138,7 +138,7 @@ const getQueryString = query => {
       return null;
     }).filter( part => part !== null );
 
-    return parts.length ? `?${ parts.join( '&' )}` : '';
+    return parts.length ? `?${ parts.join( '&' ) }` : '';
   }
 
   return '';
@@ -158,12 +158,12 @@ const getPathName = to => {
       }
     });
 
-    return `/${ pathNameParts.join( '/' )}`;
+    return `/${ pathNameParts.join( '/' ) }`;
   }
 
   const url = to.toString();
   const [ pathName ] = url.split( '?' );
-  return `/${ pathName.replace( /(^\/|\/$)/, '' )}`;
+  return `/${ pathName.replace( /(^\/|\/$)/, '' ) }`;
 };
 
 const getLocation = to => {

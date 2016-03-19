@@ -51,7 +51,7 @@ const getParams = ( routePath, pathName ) => {
 };
 
 const getRoute = ( url, routes ) => {
-  const pathName = `/${ url.split( '?' )[ 0 ].replace( /(^\/|\/$)/, '' )}`;
+  const pathName = `/${ url.split( '?' )[ 0 ].replace( /(^\/|\/$)/, '' ) }`;
 
   for ( const route of routes ) {
     const routePath = `/${ route
@@ -68,6 +68,8 @@ const getRoute = ( url, routes ) => {
       };
     }
   }
+
+  return null;
 };
 
 export { match, getActionCreators, getComponent, getParams };
