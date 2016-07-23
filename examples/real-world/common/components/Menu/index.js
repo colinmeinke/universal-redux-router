@@ -1,6 +1,6 @@
 import React from 'react';
-import { changePageTo, Link } from '../../../../../src';
-import getLocation from '../../../../../src/helpers/getLocation';
+import { changePageTo, Link } from '../../../universal-redux-router';
+import getLocation from '../../../universal-redux-router/helpers/getLocation';
 
 import { countries } from '../../config';
 

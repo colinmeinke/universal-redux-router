@@ -1,5 +1,5 @@
 import { applyMiddleware, createStore } from 'redux';
-import { getState, routerMiddleware, routerReducer } from '../../../src';
+import { getState, routerMiddleware, routerReducer } from '../universal-redux-router';
 
 import * as reducers from './reducers';
 import routes from './routes';

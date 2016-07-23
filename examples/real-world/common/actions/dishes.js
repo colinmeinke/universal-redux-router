@@ -1,6 +1,6 @@
 import 'isomorphic-fetch';
 
-import getLocation from '../../../../src/helpers/getLocation';
+import getLocation from '../../universal-redux-router/helpers/getLocation';
 
 const UPDATE_DISHES = 'UPDATE_DISHES';
 

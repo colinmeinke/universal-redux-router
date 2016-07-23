@@ -1,14 +1,16 @@
-import config from '../../webpack.config.babel';
-
 export default {
-  ...config,
   externals: {
-    ...config.externals,
+    react: 'React',
+    'react-redux': 'ReactRedux',
     redux: 'Redux',
   },
   module: {
     loaders: [
-      ...config.module.loaders,
+      {
+        exclude: /node_modules/,
+        loader: 'babel',
+        test: /\.js$/,
+      },
       { loaders: [ 'json' ], test: /\.json$/ },
     ],
   },

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from '../../../../../src';
+import { Link } from '../../../universal-redux-router';
 
 const NotFound = () => (
   <div>

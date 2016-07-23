@@ -1,6 +1,6 @@
 import qs from 'query-string';
 import React from 'react';
-import { Link } from '../../../../../src';
+import { Link } from '../../../universal-redux-router';
 
 const name = 'Colin';
 
