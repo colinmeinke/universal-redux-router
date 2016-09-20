@@ -1,7 +1,7 @@
 import getAction from './getAction';
 import { resolveActionCreator } from './resolveActionCreator';
 
-const getState = ( url, routes, reducer ) => new Promise(( resolve, reject ) => {
+const getState = ( url, routes, reducer, initialState = {}) => new Promise(( resolve, reject ) => {
   const actionCreatorsReducer = ( state, actionCreators ) => new Promise(( res, rej ) => {
     if ( actionCreators.length ) {
       const actionCreator = actionCreators.shift();
@@ -19,7 +19,7 @@ const getState = ( url, routes, reducer ) => new Promise(( resolve, reject ) => 
   });
 
   getAction( url, routes ).then( action => {
-    const state = reducer({}, action );
+    const state = reducer( initialState, action );
 
     if ( action.after.length ) {
       actionCreatorsReducer( state, action.after )
