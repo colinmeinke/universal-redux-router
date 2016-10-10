@@ -1,15 +1,15 @@
-import React from 'react';
+import React from 'react'
 
 import {
   dishesLoaded,
   dishesLoading,
   getDishes,
   updateCountry,
-  updateIsVegetarian,
-} from './actions';
+  updateIsVegetarian
+} from './actions'
 
-import Menu from './components/Menu';
-import NotFound from './components/NotFound';
+import Menu from './components/Menu'
+import NotFound from './components/NotFound'
 
 const routes = [
   [
@@ -17,11 +17,12 @@ const routes = [
     {
       country: updateCountry,
       isVegetarian: updateIsVegetarian,
-      after: [ dishesLoading, getDishes, dishesLoaded ],
+      after: [ dishesLoading, getDishes, dishesLoaded ]
     },
+    // eslint-disable-next-line react/jsx-indent
     <Menu />
   ],
-  [ '*', <NotFound /> ],
-];
+  [ '*', <NotFound /> ]
+]
 
-export default routes;
+export default routes

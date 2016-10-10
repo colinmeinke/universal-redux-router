@@ -45,7 +45,7 @@ In the above example, we have the following state:
 {
   id: 782,
   page: 2,
-  tags: [ 'coding', 'making' ],
+  tags: [ 'coding', 'making' ]
 }
 ```
 
@@ -68,11 +68,11 @@ const routes = [
     {
       id: updateId,
       page: updatePage,
-      tags: updateTags,
+      tags: updateTags
     },
-    <UsersPosts />,
-  ],
-];
+    <UsersPosts />
+  ]
+]
 ```
 
 In the above example, we have one route defined that will
@@ -87,8 +87,8 @@ For example, navigating to
 `/users/782/posts?page=2&tags[]=coding,making` will result in
 the following function calls:
 
-- `updateId( '782' )`
-- `updatePage( '2' )`
+- `updateId('782')`
+- `updatePage('2')`
 - `updateTags([ 'coding', 'making' ])`
 
 The returned actions are then used to calculate the new state
@@ -108,11 +108,11 @@ const routes = [
       id: updateId,
       page: updatePage,
       tags: updateTags,
-      after: [ postsUpdating, getPosts, postsUpdated ],
+      after: [ postsUpdating, getPosts, postsUpdated ]
     },
-    <UsersPosts />,
-  ],
-];
+    <UsersPosts />
+  ]
+]
 ```
 
 In the above example the action creators `updateId`, `updatePage`
@@ -169,13 +169,13 @@ It matches a route and returns the component defined within
 that route.
 
 ```js
-import { Router } from 'universal-redux-router';
+import { Router } from 'universal-redux-router'
 
 const Root = () => (
-  <Provider store={ store }>
-    <Router routes={ routes } />
+  <Provider store={store}>
+    <Router routes={routes} />
   </Provider>
-);
+)
 ```
 
 ### routerMiddleware
@@ -189,11 +189,11 @@ It also includes a few conveniences like updating scroll
 position on navigation and handling browser history.
 
 ```js
-import { routerMiddleware } from 'universal-redux-router';
+import { routerMiddleware } from 'universal-redux-router'
 
-const middleware = applyMiddleware( routerMiddleware( routes ));
+const middleware = applyMiddleware(routerMiddleware(routes))
 
-return createStore( reducer, state, middleware );
+return createStore(reducer, state, middleware)
 ```
 
 ### routerReducer
@@ -208,9 +208,9 @@ incoming actions apart from `CHANGE_PAGE_TO`. When it receives
 actions to calculate state.
 
 ```js
-import { routerReducer } from 'universal-redux-router';
+import { routerReducer } from 'universal-redux-router'
 
-const reducer = routerReducer( reducers );
+const reducer = routerReducer(reducers)
 ```
 
 ### changePageTo
@@ -222,15 +222,15 @@ Redux Router.
 It can either take an array of data, or a URL string.
 
 ```js
-import { changePageTo } from 'universal-redux-router';
+import { changePageTo } from 'universal-redux-router'
 
 store.dispatch(
-  changePageTo([ 'users', id, 'posts', { page, tags }])
-);
+  changePageTo([ 'users', id, 'posts', { page, tags } ])
+)
 
 store.dispatch(
-  changePageTo( `/users/${ id }/string?page=${ page }&tags[]=${ tags.join( ',' )}` )
-);
+  changePageTo(`/users/${id}/string?page=${page}&tags[]=${tags.join(',')}`)
+)
 ```
 
 ### Link
@@ -244,13 +244,13 @@ Like `changePageTo` it accepts both an array of data or a URL
 string as its `to` prop.
 
 ```js
-import { Link } from 'universal-redux-router';
+import { Link } from 'universal-redux-router'
 
-<Link to={[ 'users', id, 'posts', { page, tags }]}>
+<Link to={[ 'users', id, 'posts', { page, tags } ]}>
   User posts
 </Link>
 
-<Link to={ `/users/${ id }/string?page=${ page }&tags[]=${ tags.join( ',' )}` }>
+<Link to={`/users/${id}/string?page=${page}&tags[]=${tags.join(',')}`}>
   User posts
 </Link>
 ```
@@ -268,11 +268,11 @@ We can also use it on both server and client to avoid passing
 state between the two.
 
 ```js
-import { getState } from 'universal-redux-router';
+import { getState } from 'universal-redux-router'
 
-getState( url, routes, reducer ).then( state => {
-  const store = createStore( reducer, state, middleware );
-});
+getState(url, routes, reducer).then(state => {
+  const store = createStore(reducer, state, middleware)
+})
 ```
 
 ## Help make this better

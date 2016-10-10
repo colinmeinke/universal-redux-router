@@ -1,53 +1,55 @@
-import expect from 'expect';
-import React from 'react';
+/* eslint-env mocha */
 
-import routerMiddleware from '../../src/middleware/router';
-import updateUrl from '../../src/actions/updateUrl';
-import { CHANGE_PAGE_TO } from '../../src/constants';
+import expect from 'expect'
+import React from 'react'
 
-describe( 'middleware', () => {
-  describe( 'router()', () => {
-    const dispatch = () => ({});
+import routerMiddleware from '../../src/middleware/router'
+import updateUrl from '../../src/actions/updateUrl'
+import { CHANGE_PAGE_TO } from '../../src/constants'
 
-    const next = action => action;
+describe('middleware', () => {
+  describe('router()', () => {
+    const dispatch = () => ({})
 
-    const updatePage = page => ({ type: 'UPDATE_PAGE', page });
+    const next = action => action
+
+    const updatePage = page => ({ type: 'UPDATE_PAGE', page })
 
     const routes = [
-      [ 'hello', 'world', { page: updatePage }, <p>Hello world</p> ],
-    ];
+      [ 'hello', 'world', { page: updatePage }, <p>Hello world</p> ]
+    ]
 
-    const router = routerMiddleware( routes, { isServer: true });
+    const router = routerMiddleware(routes, { isServer: true })
 
-    it( 'should not alter action that is not change page to', () => {
+    it('should not alter action that is not change page to', () => {
       const action = {
-        type: 'HELLO_WORLD',
-      };
+        type: 'HELLO_WORLD'
+      }
 
-      expect( router({ dispatch })( next )( action )).toEqual( action );
-    });
+      expect(router({ dispatch })(next)(action)).toEqual(action)
+    })
 
-    it( 'should add correct actions and url props to change page to action', done => {
+    it('should add correct actions and url props to change page to action', done => {
       const action = {
         options: { shouldAddToHistory: false },
         to: [ 'hello', 'world' ],
-        type: CHANGE_PAGE_TO,
-      };
+        type: CHANGE_PAGE_TO
+      }
 
-      const url = '/hello/world';
+      const url = '/hello/world'
 
-      const actions = [ updateUrl( url ), updatePage( undefined ) ];
+      const actions = [ updateUrl(url), updatePage(undefined) ]
 
-      const result = router({ dispatch })( next )( action );
+      const result = router({ dispatch })(next)(action)
 
       setTimeout(() => {
         result.then(({ a, u }) => {
-          expect( a ).toEqual( actions );
-          expect( u ).toEqual( url );
-        });
+          expect(a).toEqual(actions)
+          expect(u).toEqual(url)
+        })
 
-        done();
-      }, 0 );
-    });
-  });
-});
+        done()
+      }, 0)
+    })
+  })
+})

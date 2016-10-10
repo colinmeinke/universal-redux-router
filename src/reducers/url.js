@@ -1,12 +1,12 @@
-import { UPDATE_URL } from '../constants';
+import { UPDATE_URL } from '../constants'
 
-const url = ( state = '/', action = {}) => {
-  switch ( action.type ) {
+const url = (state = '/', action = {}) => {
+  switch (action.type) {
     case UPDATE_URL:
-      return action.url;
+      return action.url
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default url;
+export default url

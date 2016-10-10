@@ -1,77 +1,77 @@
-const match = ( pathName, routePath ) => {
-  const keys = routePath.replace( /(^\/|\/$)/, '' ).split( '/' );
-  const values = pathName.replace( /(^\/|\/$)/, '' ).split( '/' );
+const match = (pathName, routePath) => {
+  const keys = routePath.replace(/(^\/|\/$)/, '').split('/')
+  const values = pathName.replace(/(^\/|\/$)/, '').split('/')
 
-  let i = 0;
-  let k;
+  let i = 0
+  let k
 
-  for ( k of keys ) {
-    if (( k !== '*' ) && ( !k.startsWith( ':' ))) {
-      if ( k !== values[ i ]) {
-        return false;
+  for (k of keys) {
+    if ((k !== '*') && (!k.startsWith(':'))) {
+      if (k !== values[ i ]) {
+        return false
       }
     }
 
-    i++;
+    i++
   }
 
-  if ( values[ i ] && k !== '*' ) {
-    return false;
+  if (values[ i ] && k !== '*') {
+    return false
   }
 
-  return true;
-};
+  return true
+}
 
 const getActionCreators = route => {
-  const actionCreators = {};
+  const actionCreators = {}
 
-  for ( const part of route ) {
-    if ( typeof part === 'object' && !part.props ) {
-      Object.assign( actionCreators, part );
+  for (const part of route) {
+    if (typeof part === 'object' && !part.props) {
+      Object.assign(actionCreators, part)
     }
   }
 
-  return actionCreators;
-};
+  return actionCreators
+}
 
-const getComponent = route => route[ route.length - 1 ];
+const getComponent = route => route[ route.length - 1 ]
 
-const getParams = ( routePath, pathName ) => {
-  const params = {};
-  const keys = routePath.split( '/' );
-  const values = pathName.split( '/' );
+const getParams = (routePath, pathName) => {
+  const params = {}
+  const keys = routePath.split('/')
+  const values = pathName.split('/')
 
-  keys.forEach(( k, i ) => {
-    if ( k.startsWith( ':' ) && values[ i ]) {
-      params[ k.substr( 1 ) ] = values[ i ];
+  keys.forEach((k, i) => {
+    if (k.startsWith(':') && values[ i ]) {
+      params[ k.substr(1) ] = values[ i ]
     }
-  });
+  })
 
-  return params;
-};
+  return params
+}
 
-const getRoute = ( url, routes ) => {
-  const pathName = `/${ url.split( '?' )[ 0 ].replace( /(^\/|\/$)/, '' ) }`;
+const getRoute = (url, routes) => {
+  const pathName = `/${url.split('?')[ 0 ].replace(/(^\/|\/$)/, '')}`
 
-  for ( const route of routes ) {
-    const routePath = `/${ route
-      .filter( part => [ 'object', 'array' ].indexOf( typeof part ) === -1 )
-      .map( part => part.replace( /(^\/|\/$)/, '' ))
-      .join( '/' )
-    }`;
+  for (const route of routes) {
+    const routePath = `/${route
+      .filter(part => [ 'object', 'array' ].indexOf(typeof part) === -1)
+      .map(part => part.replace(/(^\/|\/$)/, ''))
+      .join('/')
+    }`
 
-    if ( match( pathName, routePath )) {
+    if (match(pathName, routePath)) {
       return {
-        actionCreators: getActionCreators( route ),
-        component: getComponent( route ),
-        params: getParams( routePath, pathName ),
-      };
+        actionCreators: getActionCreators(route),
+        component: getComponent(route),
+        params: getParams(routePath, pathName)
+      }
     }
   }
 
-  return null;
-};
+  return null
+}
 
-export { match, getActionCreators, getComponent, getParams };
+export { match, getActionCreators, getComponent, getParams }
 
-export default getRoute;
+export default getRoute

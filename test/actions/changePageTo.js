@@ -1,25 +1,27 @@
-import expect from 'expect';
+/* eslint-env mocha */
 
-import changePageTo from '../../src/actions/changePageTo';
-import { CHANGE_PAGE_TO } from '../../src/constants';
+import expect from 'expect'
 
-describe( 'action creator', () => {
-  describe( 'changePageTo()', () => {
-    it( 'should create an action to change page', () => {
+import changePageTo from '../../src/actions/changePageTo'
+import { CHANGE_PAGE_TO } from '../../src/constants'
+
+describe('action creator', () => {
+  describe('changePageTo()', () => {
+    it('should create an action to change page', () => {
       const options = {
         shouldAddToHistory: false,
-        shouldScrollToTop: false,
-      };
+        shouldScrollToTop: false
+      }
 
-      const to = '/hello-world';
+      const to = '/hello-world'
 
       const expectedAction = {
         options,
         to,
-        type: CHANGE_PAGE_TO,
-      };
+        type: CHANGE_PAGE_TO
+      }
 
-      expect( changePageTo( to, options )).toEqual( expectedAction );
-    });
-  });
-});
+      expect(changePageTo(to, options)).toEqual(expectedAction)
+    })
+  })
+})

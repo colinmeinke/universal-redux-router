@@ -1,14 +1,14 @@
-import { UPDATE_COUNTRY } from '../actions';
+import { UPDATE_COUNTRY } from '../actions'
 
-import { countries } from '../config';
+import { countries } from '../config'
 
-const country = ( state = countries[ 0 ], action ) => {
-  switch ( action.type ) {
+const country = (state = countries[ 0 ], action) => {
+  switch (action.type) {
     case UPDATE_COUNTRY:
-      return action.country;
+      return action.country
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default country;
+export default country

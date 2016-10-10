@@ -1,14 +1,14 @@
-import { DISHES_LOADED, DISHES_LOADING } from '../actions';
+import { DISHES_LOADED, DISHES_LOADING } from '../actions'
 
-const areDishesLoading = ( state = false, action ) => {
-  switch ( action.type ) {
+const areDishesLoading = (state = false, action) => {
+  switch (action.type) {
     case DISHES_LOADED:
-      return false;
+      return false
     case DISHES_LOADING:
-      return true;
+      return true
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default areDishesLoading;
+export default areDishesLoading

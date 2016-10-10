@@ -1,3 +1,7 @@
 dist/
+examples/*/client.dist.js
+examples/*/client.dist.js.map
+examples/*/universal-redux-router/
 lib/
 node_modules/
+npm-debug.log

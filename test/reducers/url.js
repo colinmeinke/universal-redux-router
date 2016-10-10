@@ -1,21 +1,23 @@
-import expect from 'expect';
+/* eslint-env mocha */
 
-import urlReducer from '../../src/reducers/url';
-import { UPDATE_URL } from '../../src/constants';
+import expect from 'expect'
 
-describe( 'reducer', () => {
-  describe( 'url()', () => {
-    it( 'should return the default state by default', () => {
-      expect( urlReducer()).toEqual( '/' );
-    });
+import urlReducer from '../../src/reducers/url'
+import { UPDATE_URL } from '../../src/constants'
 
-    it( 'should handle update url action type', () => {
-      const url = '/hello-world';
+describe('reducer', () => {
+  describe('url()', () => {
+    it('should return the default state by default', () => {
+      expect(urlReducer()).toEqual('/')
+    })
 
-      expect( urlReducer( '/initial-url', {
+    it('should handle update url action type', () => {
+      const url = '/hello-world'
+
+      expect(urlReducer('/initial-url', {
         type: UPDATE_URL,
-        url,
-      })).toEqual( url );
-    });
-  });
-});
+        url
+      })).toEqual(url)
+    })
+  })
+})

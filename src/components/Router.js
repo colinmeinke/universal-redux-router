@@ -1,12 +1,12 @@
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 
-import getRoute from '../helpers/getRoute';
+import getRoute from '../helpers/getRoute'
 
-const Router = ({ routes, url }) => getRoute( url, routes ).component;
+const Router = ({ routes, url }) => getRoute(url, routes).component
 
-const mapStateToProps = ({ url }) => ({ url });
+const mapStateToProps = ({ url }) => ({ url })
 
-const RouterContainer = connect( mapStateToProps )( Router );
+const RouterContainer = connect(mapStateToProps)(Router)
 
-export { Router };
-export default RouterContainer;
+export { Router }
+export default RouterContainer

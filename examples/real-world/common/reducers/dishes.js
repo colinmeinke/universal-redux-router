@@ -1,12 +1,12 @@
-import { UPDATE_DISHES } from '../actions';
+import { UPDATE_DISHES } from '../actions'
 
-const dishes = ( state = [], action ) => {
-  switch ( action.type ) {
+const dishes = (state = [], action) => {
+  switch (action.type) {
     case UPDATE_DISHES:
-      return action.dishes;
+      return action.dishes
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default dishes;
+export default dishes

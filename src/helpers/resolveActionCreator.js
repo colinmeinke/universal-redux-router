@@ -1,15 +1,15 @@
-const resolveActionCreator = ( actionCreator, data ) => Promise.resolve(
-  actionCreator( data )
-);
+const resolveActionCreator = (actionCreator, data) => Promise.resolve(
+  actionCreator(data)
+)
 
 const getResolvedActionCreators = actionCreatorsMap => {
-  const resolved = [];
+  const resolved = []
 
-  actionCreatorsMap.forEach(( data, actionCreator ) => {
-    resolved.push( resolveActionCreator( actionCreator, data ));
-  });
+  actionCreatorsMap.forEach((data, actionCreator) => {
+    resolved.push(resolveActionCreator(actionCreator, data))
+  })
 
-  return resolved;
-};
+  return resolved
+}
 
-export { resolveActionCreator, getResolvedActionCreators };
+export { resolveActionCreator, getResolvedActionCreators }

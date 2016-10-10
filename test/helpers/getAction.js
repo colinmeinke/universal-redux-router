@@ -1,41 +1,44 @@
-import expect from 'expect';
-import React from 'react';
+/* eslint-env mocha */
 
-import getAction from '../../src/helpers/getAction';
-import updateUrl from '../../src/actions/updateUrl';
-import { CHANGE_PAGE_TO } from '../../src/constants';
+import expect from 'expect'
+import React from 'react'
 
-describe( 'helper', () => {
-  describe( 'getAction()', () => {
-    it( 'should get to url and associated route actions', done => {
-      const actionFoo = () => ({ type: 'FOO' });
-      const actionBar = () => ({ type: 'BAR' });
-      const actionBaz = () => ({ type: 'BAZ' });
+import getAction from '../../src/helpers/getAction'
+import updateUrl from '../../src/actions/updateUrl'
+import { CHANGE_PAGE_TO } from '../../src/constants'
 
-      const to = [ 'hello', 'world' ];
+describe('helper', () => {
+  describe('getAction()', () => {
+    it('should get to url and associated route actions', done => {
+      const actionFoo = () => ({ type: 'FOO' })
+      const actionBar = () => ({ type: 'BAR' })
+      const actionBaz = () => ({ type: 'BAZ' })
+
+      const to = [ 'hello', 'world' ]
 
       const routes = [
         [
           'hello',
           'world',
-          { foo: actionFoo, bar: actionBar, after: [ actionBaz ]},
-          <p>Hello world</p>,
-        ],
-      ];
+          { foo: actionFoo, bar: actionBar, after: [ actionBaz ] },
+          // eslint-disable-next-line react/jsx-indent
+          <p>Hello world</p>
+        ]
+      ]
 
-      const url = '/hello/world';
+      const url = '/hello/world'
 
       const expectedAction = {
-        actions: [ updateUrl( url ), actionFoo(), actionBar() ],
+        actions: [ updateUrl(url), actionFoo(), actionBar() ],
         after: [ actionBaz ],
         type: CHANGE_PAGE_TO,
-        url,
-      };
+        url
+      }
 
-      getAction( to, routes ).then( action => {
-        expect( action ).toEqual( expectedAction );
-        done();
-      });
-    });
-  });
-});
+      getAction(to, routes).then(action => {
+        expect(action).toEqual(expectedAction)
+        done()
+      })
+    })
+  })
+})

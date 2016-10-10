@@ -1,9 +1,9 @@
-import { CHANGE_PAGE_TO } from '../constants';
+import { CHANGE_PAGE_TO } from '../constants'
 
-const changePageTo = ( to, { shouldAddToHistory = true, shouldScrollToTop = true } = {}) => ({
+const changePageTo = (to, { shouldAddToHistory = true, shouldScrollToTop = true } = {}) => ({
   options: { shouldAddToHistory, shouldScrollToTop },
   type: CHANGE_PAGE_TO,
-  to,
-});
+  to
+})
 
-export default changePageTo;
+export default changePageTo

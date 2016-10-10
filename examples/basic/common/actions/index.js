@@ -1,3 +1,3 @@
-import { UPDATE_NAME, updateName } from './name';
+import { UPDATE_NAME, updateName } from './name'
 
-export { UPDATE_NAME, updateName };
+export { UPDATE_NAME, updateName }

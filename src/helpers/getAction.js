@@ -1,59 +1,59 @@
-import getLocation from './getLocation';
-import getRoute from './getRoute';
-import updateUrl from '../actions/updateUrl';
-import { CHANGE_PAGE_TO } from '../constants';
-import { getResolvedActionCreators } from './resolveActionCreator';
+import getLocation from './getLocation'
+import getRoute from './getRoute'
+import updateUrl from '../actions/updateUrl'
+import { CHANGE_PAGE_TO } from '../constants'
+import { getResolvedActionCreators } from './resolveActionCreator'
 
-const getActions = ( url, actionCreators, data ) => new Promise(( resolve, reject ) => {
-  const actionCreatorsMap = new Map();
+const getActions = (url, actionCreators, data) => new Promise((resolve, reject) => {
+  const actionCreatorsMap = new Map()
 
-  actionCreatorsMap.set( updateUrl, url );
+  actionCreatorsMap.set(updateUrl, url)
 
-  Object.keys( actionCreators ).forEach( k => {
-    if ( k !== 'after' ) {
-      if ( Array.isArray( actionCreators[ k ])) {
-        actionCreators[ k ].forEach( actionCreator => {
-          actionCreatorsMap.set( actionCreator, data[ k ]);
-        });
+  Object.keys(actionCreators).forEach(k => {
+    if (k !== 'after') {
+      if (Array.isArray(actionCreators[ k ])) {
+        actionCreators[ k ].forEach(actionCreator => {
+          actionCreatorsMap.set(actionCreator, data[ k ])
+        })
       } else {
-        actionCreatorsMap.set( actionCreators[ k ], data[ k ]);
+        actionCreatorsMap.set(actionCreators[ k ], data[ k ])
       }
     }
-  });
+  })
 
-  Promise.all( getResolvedActionCreators( actionCreatorsMap ))
-    .then( resolve )
-    .catch( reject );
-});
+  Promise.all(getResolvedActionCreators(actionCreatorsMap))
+    .then(resolve)
+    .catch(reject)
+})
 
 const getAfter = actionCreators => {
-  const after = [];
+  const after = []
 
-  if ( actionCreators.after ) {
-    if ( Array.isArray( actionCreators.after )) {
-      actionCreators.after.forEach( actionCreator => {
-        after.push( actionCreator );
-      });
+  if (actionCreators.after) {
+    if (Array.isArray(actionCreators.after)) {
+      actionCreators.after.forEach(actionCreator => {
+        after.push(actionCreator)
+      })
     } else {
-      after.push( actionCreators.after );
+      after.push(actionCreators.after)
     }
   }
 
-  return after;
-};
+  return after
+}
 
-const getAction = ( to, routes ) => new Promise(( resolve, reject ) => {
-  const { query, url } = getLocation( to );
-  const { actionCreators, params } = getRoute( url, routes );
+const getAction = (to, routes) => new Promise((resolve, reject) => {
+  const { query, url } = getLocation(to)
+  const { actionCreators, params } = getRoute(url, routes)
 
-  getActions( url, actionCreators, { ...query, ...params })
-    .then( actions => resolve({
+  getActions(url, actionCreators, { ...query, ...params })
+    .then(actions => resolve({
       actions,
-      after: getAfter( actionCreators ),
+      after: getAfter(actionCreators),
       type: CHANGE_PAGE_TO,
-      url,
+      url
     }))
-    .catch( reject );
-});
+    .catch(reject)
+})
 
-export default getAction;
+export default getAction

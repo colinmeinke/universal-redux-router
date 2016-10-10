@@ -1,48 +1,50 @@
-import expect from 'expect';
+/* eslint-env mocha */
 
-import routerReducer from '../../src/reducers/router';
-import { CHANGE_PAGE_TO, UPDATE_URL } from '../../src/constants';
+import expect from 'expect'
 
-describe( 'reducer', () => {
-  describe( 'router()', () => {
-    const pageReducer = ( state = 1, { page }) => ( parseInt( page || state, 10 ));
+import routerReducer from '../../src/reducers/router'
+import { CHANGE_PAGE_TO, UPDATE_URL } from '../../src/constants'
+
+describe('reducer', () => {
+  describe('router()', () => {
+    const pageReducer = (state = 1, { page }) => (parseInt(page || state, 10))
 
     const reducers = {
-      page: pageReducer,
-    };
+      page: pageReducer
+    }
 
-    const reducer = routerReducer( reducers );
+    const reducer = routerReducer(reducers)
 
-    it( 'should return default state when no action passed to reducer', () => {
+    it('should return default state when no action passed to reducer', () => {
       const expectedState = {
         page: 1,
-        url: '/',
-      };
+        url: '/'
+      }
 
-      expect( reducer({}, {})).toEqual( expectedState );
-    });
+      expect(reducer({}, {})).toEqual(expectedState)
+    })
 
-    it( 'should run root reducer when not change page to action type', () => {
+    it('should run root reducer when not change page to action type', () => {
       const expectedState = {
         page: 5,
-        url: '/',
-      };
+        url: '/'
+      }
 
-      expect( reducer({}, { page: 5 })).toEqual( expectedState );
-    });
+      expect(reducer({}, { page: 5 })).toEqual(expectedState)
+    })
 
-    it( 'should run batch reducer when change page to action type', () => {
+    it('should run batch reducer when change page to action type', () => {
       const expectedState = {
         page: 1,
-        url: '/hello/world',
-      };
+        url: '/hello/world'
+      }
 
-      expect( reducer({}, {
+      expect(reducer({}, {
         actions: [{ type: UPDATE_URL, url: '/hello/world' }, { page: undefined }],
         after: [],
         to: [ 'hello', 'world' ],
-        type: CHANGE_PAGE_TO,
-      })).toEqual( expectedState );
-    });
-  });
-});
+        type: CHANGE_PAGE_TO
+      })).toEqual(expectedState)
+    })
+  })
+})
