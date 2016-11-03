@@ -33,9 +33,9 @@
     "url": "https://github.com/colinmeinke/universal-redux-router"
   },
   "scripts": {
-    "build": "npm run clean && npm run copy && webpack ./client.js ./client.dist.js --config ./webpack.config.babel.js",
-    "clean": "rm -rf ./universal-redux-router ./client.dist.js",
+    "build": "npm run tidy && npm run copy && webpack ./client.js ./client.dist.js --config ./webpack.config.babel.js",
     "copy": "cp -r ../../src ./universal-redux-router",
-    "start": "babel-node ./server.js"
+    "start": "babel-node ./server.js",
+    "tidy": "rm -rf ./universal-redux-router ./client.dist.js"
   }
 }

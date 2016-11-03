@@ -62,7 +62,6 @@
     "url": "https://github.com/colinmeinke/universal-redux-router"
   },
   "scripts": {
-    "clean": "rimraf lib dist",
     "commit": "git-cz",
     "build": "npm run build:lib && npm run build:umd",
     "build:lib": "babel src --out-dir lib",
@@ -71,9 +70,10 @@
     "build:umd:pro": "webpack -p ./src/index.js ./dist/universal-redux-router.min.js --output-library UniversalReduxRouter --output-library-target umd --config ./webpack.config.babel.js",
     "fix": "standard --fix",
     "lint": "standard --verbose | snazzy",
-    "prepublish": "npm run clean && npm run build",
+    "prepublish": "npm run tidy && npm run build",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "test": "mocha --compilers js:babel-core/register test/**/*.js",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "tidy": "rimraf lib dist"
   },
   "version": "0.0.0-semantically-released"
 }
